@@ -174,10 +174,16 @@
 
             // detect days count (depends on month and year)
             // originally https://github.com/vitalets/combodate/pull/7
-            if (this.options.smartDays && this.$month && this.$year) {
+            if (this.options.smartDays && this.$month) {
                 var month = parseInt(this.$month.val(), 10);
-                var year = parseInt(this.$year.val(), 10);
-
+                if (this.$year)
+                {
+                    var year = parseInt(this.$year.val(), 10);
+                }
+                if (isNaN(year))
+                {
+                    year = (new Date()).getFullYear();
+                }
                 if (!isNaN(month) && !isNaN(year)) {
                     daysCount = moment([year, month]).daysInMonth();
                 }
